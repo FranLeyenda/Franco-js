@@ -7,7 +7,7 @@ for( i = 0; i < 4; i++) {
 
     if ( nombre_usuario == usuario_registrado) {
         console.log('Bienvenido al sistema: ', usuario_registrado);
-        alert('Usted ingreso en ConsecionariaFranco');
+        alert('Usted ingreso en ConcesionariaFranco');
         let vehiculo = prompt('Ingrese el vehiculo que desea comprar.(Auto o Moto)');
 
         if ( vehiculo == 'Auto' || vehiculo == 'Moto') {
@@ -27,14 +27,19 @@ for( i = 0; i < 4; i++) {
             }
             else {
                 alert('Cantidad de cuotas invalidas');
+                continue
             }
 
             let valor_cuota = prestamo / cuotas
 
             let valor_interes = valor_cuota * interes
 
+            alert(`El valor de la cuota es de: ${valor_cuota + valor_interes}`);
             console.log(`El valor de la cuota es de: ${valor_cuota + valor_interes}`);
 
+        }else {
+            console.log('Error, por favor elija Auto o Moto.');
+            continue
         }
 
         break
