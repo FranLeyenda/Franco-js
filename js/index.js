@@ -1,147 +1,205 @@
-/* function calcular_cuota () {
-    let prestamo = parseInt(prompt('Ingrese el monto del prestamo'));
+
+//FUNCION CALCULAR LA CUOTA
+
+function calcularCuota(precio, imprimirValores) {
+    let monto = precio;
     let cuotas = parseInt(prompt('Ingrese la cantidad de cuotas: 6, 12 o 24'));
-
+  
     let interes = 0;
-
+  
     while (cuotas !== 6 && cuotas !== 12 && cuotas !== 24) {
-        console.log('Cantidad de cuotas inválida');
-        cuotas = parseInt(prompt('Ingrese la cantidad de cuotas: 6, 12 o 24'));
+      console.log('Cantidad de cuotas inválida');
+      cuotas = parseInt(prompt('Ingrese la cantidad de cuotas: 6, 12 o 24'));
     }
-
-    if ( cuotas == 6 ) {
-        interes = cuotas * 0.5;
+  
+    if (cuotas === 6) {
+      interes = 0.5;
+    } else if (cuotas === 12) {
+      interes = 10;
+    } else if (cuotas === 24) {
+      interes = 20;
     }
-    else if ( cuotas == 12 ) {
-            interes = cuotas * 0.10
+  
+    let valorInteres = (monto * interes) / 100;
+    let valorCuota = (monto + valorInteres) / cuotas;
+  
+    imprimirCuota(monto, cuotas, interes, valorCuota);
+}
+  
+  // FUNCION IMPRIMIR LA CUOTA CALCULADA
+  
+  function imprimirCuota(monto, cuotas, interes, valorCuota) {
+    console.log('Monto:', monto);
+    console.log('Cuotas:', cuotas);
+    console.log('Interés:', interes + '%');
+    console.log('Valor de las cuotas:', valorCuota);
+}
+  
+
+//FUNCION FIND
+
+function buscarVehiculo() {
+    return ()=>{
+        let marcaBuscada = prompt("Ingrese la marca del vehículo a buscar:");
+  
+        let vehiculoEncontrado = vehiculosArr.find(function(vehiculo) {
+        return vehiculo.marca === marcaBuscada;
+    });
+    
+    if (vehiculoEncontrado) {
+        console.log("Vehículo encontrado:");
+        console.log(vehiculoEncontrado);
+    } else {
+        console.log("Vehículo no encontrado");
+    }   
     }
-    else if ( cuotas == 24 ) {
-        interes = cuotas * 0.20;
-    }
-
-    let valor_cuota = prestamo / cuotas;
-    let valor_interes = valor_cuota * interes;
-
-    console.log(prestamo , '+' , interes , '%');
-    console.log('El valor de las cuotas es de: ', valor_interes);
-
 }
 
+let buscarVehiculoFun = buscarVehiculo()
 
+//BUCLE DE REGISTRO
 
-let usuario_registrado = 'Fran';
+let usuarioRegistrado = 'Fran';
 let intentos = 1;
 
-for ( let i = 0; i < 4; i = i + 1 ) {
+for (let i = 0; i < 4; i = i + 1) {
+  let nombreUsuario = prompt('Ingrese su nombre de usuario');
 
-    let nombre_usuario = prompt('Ingrese su nombre de usuario');
-
-    if ( nombre_usuario != usuario_registrado && intentos < 3 ) {
-        console.log('Usuario invalido');
-        intentos = intentos + 1;
-        continue
-    }
-    else if ( intentos == 3 ) {
-        console.log('Chau tarjeta');
-        break
-    }
-    else if ( nombre_usuario == usuario_registrado ) {
-        console.log('Bienvenido al sistema: ', nombre_usuario )
-        alert('Bienvenido a ConcecionariaFranco');
-        break
-    }
+  if (nombreUsuario !== usuarioRegistrado && intentos < 3) {
+    console.log('Usuario inválido');
+    intentos = intentos + 1;
+    continue;
+  } else if (nombreUsuario !== usuarioRegistrado && intentos === 3) {
+    console.log('No ha podido ingresar');
+    break;
+  } else if (nombreUsuario === usuarioRegistrado && intentos < 4) {
+    console.log('Bienvenido al sistema:', nombreUsuario);
+    alert('Bienvenido a ConcecionariaFranco');
+    break;
+  }
 }
 
-calcular_cuota()
- */
-
-
-/* 
-function alumno ( nombre , apellido , edad ){
-    this.nombre = nombre;
-    this.apellido = apellido;
-    this.edad = edad;
-}
-
-let alumno_uno = new alumno('Franco' , 'Acuña' , 19)
-console.log(alumno_uno); */
-
+//CLASS
 
 
 class Vehiculos {
-    constructor( marca, modelo, precio, stock ) {
+    constructor(marca, modelo, precio, stock) {
         this.marca = marca;
         this.modelo = modelo;
         this.precio = precio;
         this.stock = stock;
+        this.precioNumerico = parseFloat(precio.replace('$', ''));
     }
 
-    datos_vehiculo(){
+    datosVehiculo() {
         console.log("<--------DATOS DEL VEHICULO--------->");
-        console.log("Marca: ",this.marca);
-        console.log("Modelo: ",this.modelo);
-        console.log("Precio: ",this.precio);
-        console.log("Stock: ",this.stock);
+        console.log("Marca: ", this.marca);
+        console.log("Modelo: ", this.modelo);
+        console.log("Precio: ", this.precio);
+        console.log("Stock: ", this.stock);
     }
 
-    venta_vehiculo( cantidad ) {
-        if ( this.stock >= cantidad ) {
+    ventaVehiculo(cantidad) {
+        if (this.stock >= cantidad) {
             console.log("¡Felicidades por su compra!");
             this.stock = this.stock - cantidad;
+            calcularCuota(this.precioNumerico);
         }
-        else if ( this.stock < cantidad ) {
+        else if (this.stock < cantidad) {
             console.log("No hay esa cantidad en stock");
         }
     }
 
-    
+
 }
 
-let vehiculo_uno = new Vehiculos("Fiat", "Cronos", "$2110200", 5);
-let vehiculo_dos = new Vehiculos("Ford", "Shelby", "$4023000", 2);
-let vehiculo_tres = new Vehiculos("Nissan", "Skyline", "$4859000", 1);
+let vehiculoUno = new Vehiculos("Fiat", "Cronos", "$2110200", 5);
+let vehiculoDos = new Vehiculos("Ford", "Shelby", "$4023000", 2);
+let vehiculoTres = new Vehiculos("Nissan", "Skyline", "$4859000", 1);
+
+//ARRAY VEHICULOS
+
+let vehiculosArr = [
+    vehiculoUno, 
+    vehiculoDos, 
+    vehiculoTres
+];
+
+//PANEL DE OPCIONES
+
 
 let seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1-Vehiculos en Stock."));
+let cantidad = 0;
+
 
 while (seleccion === 1) {
-  console.log(vehiculo_uno);
-  console.log(vehiculo_dos);
-  console.log(vehiculo_tres);
+    console.log(vehiculosArr[0]);
+    console.log(vehiculosArr[1]);
+    console.log(vehiculosArr[2]);
+
+    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1-Vehiculos en Stock. 2-Comprar vehiculo. 3-buscar vehiculo"));
+
+    if (seleccion === 2) {
+        seleccion = parseInt(prompt("¿Qué vehiculo desea comprar?, 1, 2 o 3."));
+
+        if (seleccion === 1) {
+            alert("DATOS DEL VEHICULO", vehiculoUno.datosVehiculo())
+            cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
+            vehiculoUno.ventaVehiculo(cantidad);
+            seleccion = parseInt(prompt("Oprima 1 para volver o 2 para salir."));
+            if (seleccion == 2) {
+                break
+            }
+        }
+        else if (seleccion === 2) {
+            alert("DATOS DEL VEHICULO", vehiculoDos.datosVehiculo());
+            cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
+            vehiculoDos.ventaVehiculo(cantidad);
+            seleccion = parseInt(prompt("Oprima 1 para volver o 2 para salir."));
+            if (seleccion == 2) {
+                break
+            }
+        }
+        else if (seleccion === 3) {
+            alert("DATOS DEL VEHICULO", vehiculoTres.datosVehiculo());
+            cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
+            vehiculoTres.ventaVehiculo(cantidad);
+            seleccion = parseInt(prompt("Oprima 1 para volver. 2 para salir."));
+            if (seleccion == 2) {
+                break
+            }
+        }
+    }
+    else if (seleccion === 3) {
+        buscarVehiculoFun();
+        seleccion = parseInt(prompt("Oprima 1 para comprar. 2 para salir."))
+        if (seleccion == 1) {
+            alert("DATOS DEL VEHICULO", vehiculoDos.datosVehiculo());
+            cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
+            vehiculoDos.ventaVehiculo(cantidad);
+            break
+        }
+    }
+} 
+
+
+
+
   
-  seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1-Vehiculos en Stock. 2-Comprar vehiculo."));
-  
-  if (seleccion === 2) {
-    seleccion = parseInt(prompt("¿Qué vehiculo desea comprar?, 1, 2 o 3."));
-    
-    if (seleccion === 1) {
-        alert("DATOS DEL VEHICULO", vehiculo_uno.datos_vehiculo())
-        let cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
-        vehiculo_uno.venta_vehiculo(cantidad);
-        seleccion = parseInt(prompt("Oprima 1 para volver o 2 para salir."));
-        if ( seleccion == 2 ) {
-        break
-        }
-    }
-    else if ( seleccion === 2 ) {
-        alert("DATOS DEL VEHICULO", vehiculo_dos.datos_vehiculo());
-        let cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
-        vehiculo_dos.venta_vehiculo(cantidad);
-        seleccion = parseInt(prompt("Oprima 1 para volver o 2 para salir."));
-        if ( seleccion == 2 ) {
-        break
-        }
-    }
-    else if ( seleccion === 3 ) {
-        alert("DATOS DEL VEHICULO", vehiculo_tres.datos_vehiculo());
-        let cantidad = parseInt(prompt("¿Cuántos quiere comprar?"));
-        vehiculo_tres.venta_vehiculo(cantidad);
-        seleccion = parseInt(prompt("Oprima 1 para volver o 2 para salir."));
-        if ( seleccion == 2 ) {
-        break
-        }
-    }
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
