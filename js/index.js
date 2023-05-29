@@ -64,7 +64,7 @@ let intentos = 1;
 
 let registro = ()=> {
     for (let i = 0; i < 4; i = i + 1) {
-        let nombreUsuario = prompt('Ingrese su nombre de usuario');
+        nombreUsuario = prompt('Ingrese su nombre de usuario');
       
         if (nombreUsuario != usuarioRegistrado && intentos < 3) {
           console.log('Usuario inválido');
@@ -79,9 +79,12 @@ let registro = ()=> {
           break;
         }
       }
+    if(nombreUsuario == usuarioRegistrado){
+        return true
+    }
 }
 
-registro();
+let registroUsuario = registro();
 
 
 //CLASS
@@ -144,8 +147,6 @@ let panelOpciones = ()=>{
         console.log(vehiculosArr[2]);
     }
 
-    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1- Vehiculos en Stock. 2- Comprar vehiculo. 3- Buscar vehiculo"));
-
     if (seleccion === 2) {
         seleccion = parseInt(prompt("¿Qué vehiculo desea comprar?, 1, 2 o 3."));
 
@@ -190,7 +191,10 @@ let panelOpciones = ()=>{
 } 
 }   
 
-panelOpciones();
+
+if (registroUsuario == true){
+    panelOpciones();
+}
 
 
 
