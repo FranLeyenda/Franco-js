@@ -62,22 +62,27 @@ let buscarVehiculoFun = buscarVehiculo()
 let usuarioRegistrado = 'Fran';
 let intentos = 1;
 
-for (let i = 0; i < 4; i = i + 1) {
-  let nombreUsuario = prompt('Ingrese su nombre de usuario');
-
-  if (nombreUsuario !== usuarioRegistrado && intentos < 3) {
-    console.log('Usuario inválido');
-    intentos = intentos + 1;
-    continue;
-  } else if (nombreUsuario !== usuarioRegistrado && intentos === 3) {
-    console.log('No ha podido ingresar');
-    break;
-  } else if (nombreUsuario === usuarioRegistrado && intentos < 4) {
-    console.log('Bienvenido al sistema:', nombreUsuario);
-    alert('Bienvenido a ConcecionariaFranco');
-    break;
-  }
+let registro = ()=> {
+    for (let i = 0; i < 4; i = i + 1) {
+        let nombreUsuario = prompt('Ingrese su nombre de usuario');
+      
+        if (nombreUsuario != usuarioRegistrado && intentos < 3) {
+          console.log('Usuario inválido');
+          intentos = intentos + 1;
+          continue;
+        } else if (nombreUsuario != usuarioRegistrado && intentos === 3) {
+          console.log('No ha podido ingresar');
+          break;
+        } else if (nombreUsuario === usuarioRegistrado && intentos < 4) {
+          console.log('Bienvenido al sistema:', nombreUsuario);
+          alert('Bienvenido a ConcecionariaFranco');
+          break;
+        }
+      }
 }
+
+registro();
+
 
 //CLASS
 
@@ -127,17 +132,19 @@ let vehiculosArr = [
 
 //PANEL DE OPCIONES
 
-
-let seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1-Vehiculos en Stock."));
 let cantidad = 0;
 
+let panelOpciones = ()=>{
+    while (true) {
+    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1- Vehiculos en Stock. 2- Comprar vehiculo. 3- Buscar vehiculo"));
 
-while (seleccion === 1) {
-    console.log(vehiculosArr[0]);
-    console.log(vehiculosArr[1]);
-    console.log(vehiculosArr[2]);
+    if(seleccion == 1){
+        console.log(vehiculosArr[0]);
+        console.log(vehiculosArr[1]);
+        console.log(vehiculosArr[2]);
+    }
 
-    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1-Vehiculos en Stock. 2-Comprar vehiculo. 3-buscar vehiculo"));
+    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1- Vehiculos en Stock. 2- Comprar vehiculo. 3- Buscar vehiculo"));
 
     if (seleccion === 2) {
         seleccion = parseInt(prompt("¿Qué vehiculo desea comprar?, 1, 2 o 3."));
@@ -181,6 +188,9 @@ while (seleccion === 1) {
         }
     }
 } 
+}   
+
+panelOpciones();
 
 
 
