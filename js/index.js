@@ -147,8 +147,6 @@ let panelOpciones = ()=>{
         console.log(vehiculosArr[2]);
     }
 
-    seleccion = parseInt(prompt("Ingrese a donde quiere acceder. 1- Vehiculos en Stock. 2- Comprar vehiculo. 3- Buscar vehiculo"));
-
     if (seleccion === 2) {
         seleccion = parseInt(prompt("¿Qué vehiculo desea comprar?, 1, 2 o 3."));
 
