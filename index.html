@@ -5,17 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Titulo HTML</h1>
-    </header>
-    <main>
+    
 
-        <button id="btn__uno">Click</button>
+    <div id="miDiv" id="contenedorPadre" draggable="true">
+        <div id="contenedor-principal">
+            <h1>Lista de compras</h1>
+            <form action="" id="formulario">
+              <label for="">Producto</label>
+              <input type="text" id="nombreProducto">
+              <label for="">Cantidad</label>
+              <input type="text" id="cantidadProducto">
+              <div id="contenedor">
+                <button  type="button" id="btnAgregar">Agregar</button>
+              </div>
+            </form>
+        </div>
+        
+        <div>
+            <ul id="lista">
+    
+            </ul>
+        </div>
+    </div>
 
-    </main>
 
-    <script src="./js/index.js"></script>
+    <script src="./js/dom.js"></script>
 </body>
 </html>
