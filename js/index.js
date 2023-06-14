@@ -1,4 +1,4 @@
-
+/* 
 //FUNCION CALCULAR LA CUOTA
 
 function calcularCuota(precio, imprimirValores) {
@@ -59,32 +59,56 @@ let buscarVehiculoFun = buscarVehiculo()
 
 //BUCLE DE REGISTRO
 
-let usuarioRegistrado = 'Fran';
-let intentos = 1;
 
-let registro = ()=> {
-    for (let i = 0; i < 4; i = i + 1) {
-        nombreUsuario = prompt('Ingrese su nombre de usuario');
-      
-        if (nombreUsuario != usuarioRegistrado && intentos < 3) {
-          console.log('Usuario inválido');
-          intentos = intentos + 1;
-          continue;
-        } else if (nombreUsuario != usuarioRegistrado && intentos === 3) {
-          console.log('No ha podido ingresar');
-          break;
-        } else if (nombreUsuario === usuarioRegistrado && intentos < 4) {
-          console.log('Bienvenido al sistema:', nombreUsuario);
-          alert('Bienvenido a ConcecionariaFranco');
-          break;
-        }
-      }
-    if(nombreUsuario == usuarioRegistrado){
-        return true
-    }
+let intentos = 0;
+
+function registrarse() {
+  let nombre = nombreUsuario.value;
+  let apellido = apellidoUsuario.value;
+  
+  let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  let nuevoUsuario = {
+    nombre: nombre,
+    apellido: apellido
+  };
+
+  usuariosRegistrados.push(nuevoUsuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuariosRegistrados));
+
+  console.log("Usuario registrado exitosamente:", nombre, apellido);
 }
 
-let registroUsuario = registro();
+function logueo() {
+  let nombre = nombreUsuario.value;
+  let apellido = apellidoUsuario.value;
+
+  let usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+  let usuarioEncontrado = false;
+
+  for (let i = 0; i < usuariosRegistrados.length; i++) {
+    let usuario = usuariosRegistrados[i];
+    if (nombre === usuario.nombre && apellido === usuario.apellido) {
+      console.log("Bienvenido al sistema:", nombre, apellido);
+      usuarioEncontrado = true;
+      break;
+    }
+  }
+
+  if (!usuarioEncontrado) {
+    console.log("Usuario incorrecto o no registrado.");
+  }
+}
+
+botonRegistro.addEventListener("click", registrarse);
+botonIniciar.addEventListener("click", logueo);
+
+
+
+
+
+
+
 
 
 //CLASS
@@ -190,11 +214,127 @@ let panelOpciones = ()=>{
     }
 } 
 }   
+ */
 
+let botonesCotizar = document.getElementsByClassName("botonCotizar");
 
-if (registroUsuario == true){
-    panelOpciones();
+for (let i = 0; i < botonesCotizar.length; i++) {
+  botonesCotizar[i].addEventListener("click", function() {
+    let imagen = this.parentNode.parentNode.querySelector(".card-img-top");
+    let contenedorPadre = document.querySelector(".contenedorPadre");
+    contenedorPadre.innerHTML = "";
+    let nuevoContenedor = document.createElement("div");
+    contenedorPadre.appendChild(nuevoContenedor);
+    let nuevoContenedorHTML = `
+      <div class="nuevoContenedorEstilos">
+        <img src="${imagen.src}">
+        <h2 class="tituloH2">Cotizar</h2>
+        <p class="textoJs">Accedé a comprarte el vehículo que querés a través de una financiación a tasa competitiva,<br>
+        con preaprobación inmediata y sin necesidad de ir a una entidad bancaria.</p>
+        <table class="tablaJs">
+            <tr class="filasJs">
+                <td class="columnas">Plazos(MESES)</td>
+                <td>INTERES</td>
+                <td>MONTO A FINANCIAR</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>49.90%</td>
+                <td>Hasta $3.000.000</td>
+            </tr>
+            <tr class="filasJs">
+                <td>24</td>
+                <td>69.90%</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>36</td>
+                <td>79.90%</td>
+                <td>Hasta un 40% del valor del vehiculo</td>
+            </tr>
+        </table>
+        <div class="nuevoBox">
+            <label class="labelJs">Ingrese monto que desea financiar: $</label>
+            <input type="text" id="inputMonto" class="inputJs">
+        </div>
+        <table class="tablaJs">
+            <tr class="filasJs">
+                <td class="columnas">Plazos(MESES)</td>
+                <td>INTERES</td>
+                <td>TOTAL A PAGAR</td>
+            </tr>
+            <tr class="fila-plazo-x">
+                <td>12</td>
+                <td>49.90%</td>
+                <td  id="montoCotizado"></td>
+            </tr>
+            <tr class="filasJs fila-plazo-x">
+                <td>24</td>
+                <td>69.90%</td>
+                <td id="montoCotizado"></td>
+            </tr>
+            <tr class="fila-plazo-x">
+                <td>36</td>
+                <td>79.90%</td>
+                <td id="montoCotizado"></td>
+            </tr>
+        </table>
+        <div>
+          <button class="botonVolver">Volver</button>
+          <button class="botonVolver">Comprar</button>
+        </div>
+      </div>`;
+
+    contenedorPadre.insertAdjacentHTML("beforeend", nuevoContenedorHTML);
+
+    let botonVolver = contenedorPadre.querySelector(".botonVolver");
+    botonVolver.addEventListener("click", function() {  
+      window.location.href = "../index.html";
+    });
+
+    let inputMonto = contenedorPadre.querySelector("#inputMonto");
+    inputMonto.addEventListener("input", cotizarVehiculo);
+  });
 }
+
+function cotizarVehiculo() {
+  let monto = parseFloat(document.getElementById('inputMonto').value);
+  
+  if (isNaN(monto)) {
+    document.getElementById('resultado').innerHTML = 'Por favor, ingrese un monto válido.';
+    return;
+  }
+  
+  let filasPlazos = document.querySelectorAll('.fila-plazo-x'); 
+  
+  filasPlazos.forEach(function(fila) {
+    let plazo = parseInt(fila.querySelector('td:first-child').textContent);
+    let tna = parseFloat(fila.querySelector('td:nth-child(2)').textContent.replace('%', ''));
+    
+    // Calcular el interés y el total
+    let interes = monto * (tna / 100);
+    let total = monto + interes;
+    
+    // Formatear los números con separadores de miles y millones
+    let interesFormateado = interes.toLocaleString();
+    let totalFormateado = total.toLocaleString();
+    
+    // Escribir los resultados formateados en la segunda tabla
+    let tdMontoCotizado = fila.querySelector('#montoCotizado');
+    tdMontoCotizado.textContent = '$' + totalFormateado;
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

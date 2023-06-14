@@ -1,109 +1,209 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: rgb(148, 99, 99);
 }
 
-h1 {
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgb(255, 128, 0);
+
+.contenedorLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.contenedorLogo .logo {
+    height: 10rem;
+    border-radius: 30px;
+} 
+
+.nombreEmpresa {
+    font-size: 1.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: .5rem;
 }
 
-form label {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: .5rem;
+.barraNavegacion {
+    display: flex;
+    align-items: center;
+}
+
+.barraNavegacion ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barraNavegacion ul li {
+    padding: 1.6rem;
+    list-style-type: none;
+}
+
+.barraNavegacion ul li a{
+    text-decoration: none;
+    color:white;
+    font-size: 1.2rem;
+    font-weight: 900;
+
+}
+
+.barraNavegacion ul li a:hover {
+    color: black;
+}
+
+/* CARDS */
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.headerUno {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    text-align: center;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 5rem;
+  }
   
+
+.card {
+    display: flex;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+  
+.card-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px 0 0 5px;
+}
+  
+.card-content {
+    padding: 10px;
+}
+  
+.card-title {
+    margin-bottom: 5px;
+}
+  
+.card-price {
+    margin-bottom: 10px;
+}
+  
+.card-button {
+    background-color: #7086ff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-form input {
-  border-radius: 5px;
-  height: 2.5rem;
-  width: 15rem;
-  margin: 1.5rem;
-  font-size: 1rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
+.nuevoContenedorEstilos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
-#contenedorPadre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.nuevoContenedorEstilos img{
+    height: 350px;
 }
 
-#contenedor-principal {
-  width: 400px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin-top: 20px;
+.nuevoContenedorEstilos .textoJs {
+    font-size: 1.5rem;
+    margin: 1rem;
 }
 
-form button {
-  font-size: 1rem;
-  width: 6rem;
-  height: 2rem;
-  border-radius: 0.5rem;
-  background-color: white;
-  margin-bottom: 10px;
+.nuevoContenedorEstilos .tituloH2 {
+    font-size: 3rem;
 }
 
-form button:hover {
-  background-color: rgb(255, 128, 0);
-  color: white;
+.nuevoContenedorEstilos .botonVolver {
+    height: 50px;
+    width: 200px;
+    color: white;
+    font-weight: bold;
+    border-radius: 40px;
+    background-color: rgb(148, 99, 99);
+    margin: 2rem;
 }
 
-#lista {
-  margin-top: 20px;
-  max-height: 200px;
-  width: 400px;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+.nuevoContenedorEstilos .botonVolver:hover {
+    background-color: rgb(127, 84, 84);
 }
 
-#lista li {
-  margin-bottom: 10px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1rem;
-  text-align: center;
+.tablaJs {
+    margin-bottom: 1.5rem;
 }
 
-#lista li:hover {
-  transition: .5s;
-  background-color: orange;
-  border-radius: 5px;
+.tablaJs tr td{
+    padding: 20px 80px;
 }
 
-/* DIV ARRASTRABLE */
-
-#miDiv {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* Estilos regulares del elemento */
+.tablaJs .filasJs {
+    background-color: rgb(255, 201, 201);
 }
 
-#miDiv.dragging {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Agregar un sombreado */
+.nuevoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem;
 }
 
+.labelJs {
+    font-size: 1.6rem;
+    margin: 1rem;
+}
+
+.inputJs {
+    display: flex;
+    height: 35px;
+    text-align: center;
+}
+
+footer {
+    margin-top: 6rem;
+    background-color: rgb(127, 84, 84);
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer a {
+    color: white;
+    font-size: 2rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: black;
+}
+
+
+
+
+  
+  

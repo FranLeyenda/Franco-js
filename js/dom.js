@@ -1,4 +1,4 @@
-function agregar() {
+/* function agregar() {
     let lista = document.getElementById("lista");
     let nombreProducto = document.getElementById("nombreProducto");
     let cantidadProducto = document.getElementById("cantidadProducto");
@@ -53,6 +53,7 @@ function dragOver(event) {
   miDiv.style.top = top + "px";
 }
 
+ */
 
-  
+
   
