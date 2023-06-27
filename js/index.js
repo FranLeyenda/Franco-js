@@ -216,6 +216,12 @@ let panelOpciones = ()=>{
 }   
  */
 
+
+
+
+
+//COTIZACION
+
 let botonesCotizar = document.getElementsByClassName("botonCotizar");
 
 for (let i = 0; i < botonesCotizar.length; i++) {
@@ -253,6 +259,8 @@ for (let i = 0; i < botonesCotizar.length; i++) {
                 <td>Hasta un 40% del valor del vehiculo</td>
             </tr>
         </table>
+        <br>
+        <h3>MONTO LIMITE DE 1500000</h3>
         <div class="nuevoBox">
             <label class="labelJs">Ingrese monto que desea financiar: $</label>
             <input type="text" id="inputMonto" class="inputJs">
@@ -281,7 +289,7 @@ for (let i = 0; i < botonesCotizar.length; i++) {
         </table>
         <div>
           <button class="botonVolver">Volver</button>
-          <button class="botonVolver">Comprar</button>
+          <button class="botonVolver" id="btnVender">Solicitar prestamo</button>
         </div>
       </div>`;
 
@@ -289,7 +297,7 @@ for (let i = 0; i < botonesCotizar.length; i++) {
 
     let botonVolver = contenedorPadre.querySelector(".botonVolver");
     botonVolver.addEventListener("click", function() {  
-      window.location.href = "../index.html";
+      window.location.href = "./index.html";
     });
 
     let inputMonto = contenedorPadre.querySelector("#inputMonto");
@@ -311,19 +319,56 @@ function cotizarVehiculo() {
     let plazo = parseInt(fila.querySelector('td:first-child').textContent);
     let tna = parseFloat(fila.querySelector('td:nth-child(2)').textContent.replace('%', ''));
     
-    // Calcular el interés y el total
     let interes = monto * (tna / 100);
     let total = monto + interes;
     
-    // Formatear los números con separadores de miles y millones
     let interesFormateado = interes.toLocaleString();
     let totalFormateado = total.toLocaleString();
-    
-    // Escribir los resultados formateados en la segunda tabla
+
     let tdMontoCotizado = fila.querySelector('#montoCotizado');
     tdMontoCotizado.textContent = '$' + totalFormateado;
   });
+
+  let btnVender = document.getElementById("btnVender");
+  btnVender.addEventListener("click", finalizarVenta);
+
 }
+
+function finalizarVenta() {
+  let monto = parseFloat(document.getElementById('inputMonto').value);
+  if (monto > 1500000) {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    });
+  } else {
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(()=>{
+      return new Promise((resolve)=>{
+        setTimeout(resolve, 2000)
+      }).then(()=>{
+        window.location.href = './index.html';
+      })
+    })
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
