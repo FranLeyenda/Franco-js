@@ -4,6 +4,34 @@
     box-sizing: border-box;
 }
 
+/* ===============JS================ */
+
+.dolarContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#dolar {
+    margin-top: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    background-color: gold;
+    width: 650px;
+
+}
+
+.dolarOficial {
+    display: block;
+    margin-bottom: 10px;
+}
+  
+.dolarBlue {
+    display: block;
+}
+  
+  
+
+/* ================================= */
 header {
     display: flex;
     justify-content: space-between;

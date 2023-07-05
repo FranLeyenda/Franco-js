@@ -306,22 +306,36 @@ for (let i = 0; i < botonesCotizar.length; i++) {
 }
 
 function cotizarVehiculo() {
-  let monto = parseFloat(document.getElementById('inputMonto').value);
-  
+  let inputMonto = document.getElementById('inputMonto');
+
+  inputMonto.addEventListener('input', function() {
+  let valorInput = inputMonto.value.trim();
+
+  if (valorInput === '') {
+    let filasPlazos = document.querySelectorAll('.fila-plazo-x');
+    filasPlazos.forEach(function(fila) {
+      let tdMontoCotizado = fila.querySelector('#montoCotizado');
+      tdMontoCotizado.textContent = '0';
+    });
+    return; 
+  }
+
+  let monto = parseFloat(valorInput);
+
   if (isNaN(monto)) {
     document.getElementById('resultado').innerHTML = 'Por favor, ingrese un monto válido.';
     return;
   }
-  
-  let filasPlazos = document.querySelectorAll('.fila-plazo-x'); 
-  
+
+  let filasPlazos = document.querySelectorAll('.fila-plazo-x');
+
   filasPlazos.forEach(function(fila) {
     let plazo = parseInt(fila.querySelector('td:first-child').textContent);
     let tna = parseFloat(fila.querySelector('td:nth-child(2)').textContent.replace('%', ''));
-    
+
     let interes = monto * (tna / 100);
     let total = monto + interes;
-    
+
     let interesFormateado = interes.toLocaleString();
     let totalFormateado = total.toLocaleString();
 
@@ -331,6 +345,8 @@ function cotizarVehiculo() {
 
   let btnVender = document.getElementById("btnVender");
   btnVender.addEventListener("click", finalizarVenta);
+});
+
 
 }
 
@@ -361,6 +377,29 @@ function finalizarVenta() {
   }
 }
 
+
+fetch("https://api.bluelytics.com.ar/v2/latest")
+  .then((response) => response.json())
+  .then((data) => {
+    const dolarOficial = data.oficial.value_avg;
+    const dolarBlue = data.blue.value_avg;
+
+    const dolarDiv = document.getElementById("dolar");
+
+    const dolarOficialElement = document.createElement("span");
+    dolarOficialElement.textContent = `Valor del dolar oficial: $${dolarOficial}`;
+    dolarOficialElement.classList.add("dolarOficial");
+    dolarDiv.appendChild(dolarOficialElement);
+
+    const dolarBlueElement = document.createElement("span");
+    dolarBlueElement.textContent = `Valor del dolar blue: $${dolarBlue}`;
+    dolarBlueElement.classList.add("dolarBlue");
+    dolarDiv.appendChild(dolarBlueElement);    
+  })
+  .catch(error => {
+    document.getElementById('dolar').textContent = 'Ocurrió un error al obtener la cotización.';
+    console.log('Ocurrió un error al obtener la cotización:', error);
+  });
 
 
 
